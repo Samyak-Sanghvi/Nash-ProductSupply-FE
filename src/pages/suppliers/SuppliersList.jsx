@@ -149,7 +149,7 @@ function SuppliersList() {
           display: "flex",
           justifyContent: "space-between",
           alignItems: "center",
-          mb: 3,
+          mb: 2,
         }}
       >
         <Typography variant="h4" fontWeight={600}>
@@ -179,11 +179,12 @@ function SuppliersList() {
                 </InputAdornment>
               ),
             }}
+            sx={{p:1}}
           />
         </Box>
 
-        <TableContainer>
-          <Table>
+        <TableContainer  sx={{ maxHeight: 300 }}>
+          <Table  stickyHeader aria-label="sticky table">
             <TableHead>
               <TableRow>
                 <TableCell sx={{ fontWeight: 600 }}>Supplier ID</TableCell>

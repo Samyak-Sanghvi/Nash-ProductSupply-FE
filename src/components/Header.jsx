@@ -25,9 +25,9 @@ function Header({ onMenuClick, drawerWidth }) {
           Product & Supply Management
         </Typography>
         <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-          <IconButton color="inherit">
+          {/* <IconButton color="inherit">
             <NotificationsIcon />
-          </IconButton>
+          </IconButton> */}
           <IconButton color="inherit">
             <Avatar sx={{ width: 32, height: 32, bgcolor: "primary.main" }}>
               <AccountCircleIcon />
