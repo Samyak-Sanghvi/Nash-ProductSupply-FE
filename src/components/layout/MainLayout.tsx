@@ -1,19 +1,41 @@
-// src/components/layout/MainLayout.tsx
+"use client"
 
-import { Outlet } from 'react-router-dom';
-import Sidebar from '../Sidebar';
-import { Box } from '@mui/material';
+import { useState } from "react"
+import { Outlet } from "react-router-dom"
+import { Box } from "@mui/material"
+import Header from "../Header"
+import Sidebar from "../Sidebar"
 
 
-const MainLayout = () => {
+const DRAWER_WIDTH = 210
+
+function MainLayout() {
+  const [mobileOpen, setMobileOpen] = useState(false)
+
+  const handleDrawerToggle = () => {
+    setMobileOpen(!mobileOpen)
+  }
+
   return (
-    <Box flex="1" display="flex" height="100vh">
-      <Sidebar />
-      <Box flex="1" p="6">
-        <Outlet /> {/* Your page components will render here */}
+    <Box sx={{ display: "flex", minHeight: "100vh" }}>
+      <Header onMenuClick={handleDrawerToggle} drawerWidth={DRAWER_WIDTH} />
+      <Sidebar drawerWidth={DRAWER_WIDTH} mobileOpen={mobileOpen} onDrawerToggle={handleDrawerToggle} />
+      <Box
+        component="main"
+        sx={{
+          flexGrow: 1,
+          p: 3,
+          width: { sm: `calc(100% - ${DRAWER_WIDTH}px)` },
+          mt: 8,
+          backgroundColor: "background.default",
+          minHeight: "100vh",
+        }}
+      >
+        <Outlet />
       </Box>
     </Box>
-  );
-};
+  )
+}
 
-export default MainLayout;
+export default MainLayout
+
