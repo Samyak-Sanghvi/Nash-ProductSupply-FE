@@ -40,134 +40,291 @@ function AddItem() {
 
   return (
     <Box>
-      <Button startIcon={<ArrowBackIcon />} onClick={() => navigate("/items")} sx={{ mb: 2 }}>
-        Back to Items
-      </Button>
+      <Paper sx={{ p: 4, width: "100%" }}>
+        <Button startIcon={<ArrowBackIcon />} onClick={() => navigate("/items")} sx={{ mb: 2 }}>
+          Back to Items
+        </Button>
 
-      <Typography variant="h4" fontWeight={600} mb={3}>
-        Add New Item
-      </Typography>
+        <Typography variant="h4" fontWeight={600} mb={3}>
+          Add New Item
+        </Typography>
 
-      <Paper sx={{ p: 4 }}>
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form style={{ width: "100%" }} onSubmit={handleSubmit(onSubmit)}>
           <Grid container spacing={3}>
-            <Grid item xs={12} md={6}>
-              <TextField
-                fullWidth
-                label="Item Name"
-                {...register("name", { required: "Name is required" })}
-                error={!!errors.name}
-                helperText={errors.name?.message}
-              />
-            </Grid>
 
-            <Grid item xs={12} md={6}>
-              <TextField
-                fullWidth
-                label="Unique ID"
-                {...register("uniqueId", { required: "Unique ID is required" })}
-                error={!!errors.uniqueId}
-                helperText={errors.uniqueId?.message}
-                placeholder="ITM001"
-              />
-            </Grid>
+            {/* Item Name */}
+            <Box
+              display="grid"
+              gridTemplateColumns={{ xs: "1fr", md: "1fr 2fr" }}
+              gap={3}
+              mx="auto"
+              sx={{ width: { xs: "100%", lg: "50%" } }}
+              alignItems="center"
+              justifyContent="center"
+            >
+              <Grid sx={{ display: "flex", flexDirection: { xs: "row", md: "row-reverse" }, fontWeight: 600 }}>
+                Item Name
+              </Grid>
+              <Grid item xs={6}>
+                <TextField
+                  fullWidth
+                  {...register("name", { required: "Item name is required" })}
+                  error={!!errors.name}
+                  helperText={errors.name?.message}
+                  placeholder="Item Name"
+                />
+              </Grid>
+            </Box>
 
-            <Grid item xs={12} md={6}>
-              <TextField
-                fullWidth
-                select
-                label="Supplier"
-                defaultValue=""
-                {...register("supplierId", { required: "Supplier is required" })}
-                error={!!errors.supplierId}
-                helperText={errors.supplierId?.message}
-              >
-                {suppliers.map((supplier) => (
-                  <MenuItem key={supplier.id} value={supplier.id}>
-                    {supplier.name}
-                  </MenuItem>
-                ))}
-              </TextField>
-            </Grid>
+            {/* Unique ID */}
+            <Box
+              display="grid"
+              gridTemplateColumns={{ xs: "1fr", md: "1fr 2fr" }}
+              gap={3}
+              mx="auto"
+              sx={{ width: { xs: "100%", lg: "50%" } }}
+              alignItems="center"
+              justifyContent="center"
+            >
+              <Grid sx={{ display: "flex", flexDirection: { xs: "row", md: "row-reverse" }, fontWeight: 600 }}>
+                Unique ID
+              </Grid>
+              <Grid item xs={6}>
+                <TextField
+                  fullWidth
+                  {...register("uniqueId", { required: "Unique ID is required" })}
+                  error={!!errors.uniqueId}
+                  helperText={errors.uniqueId?.message}
+                  placeholder="ITM001"
+                />
+              </Grid>
+            </Box>
 
-            <Grid item xs={12} md={6}>
-              <TextField
-                fullWidth
-                label="Packaging"
-                {...register("packaging")}
-                placeholder="e.g., Box of 10, Pack of 50"
-              />
-            </Grid>
+            {/* Supplier */}
+            <Box
+              display="grid"
+              gridTemplateColumns={{ xs: "1fr", md: "1fr 2fr" }}
+              gap={3}
+              mx="auto"
+              sx={{ width: { xs: "100%", lg: "50%" } }}
+              alignItems="center"
+              justifyContent="center"
+            >
+              <Grid sx={{ display: "flex", flexDirection: { xs: "row", md: "row-reverse" }, fontWeight: 600 }}>
+                Supplier
+              </Grid>
+              <Grid item xs={6}>
+                <TextField
+                  fullWidth
+                  select
+                  defaultValue=""
+                  {...register("supplierId", { required: "Supplier is required" })}
+                  error={!!errors.supplierId}
+                  helperText={errors.supplierId?.message}
+                >
+                  {suppliers.map((supplier) => (
+                    <MenuItem key={supplier.id} value={supplier.id}>
+                      {supplier.name}
+                    </MenuItem>
+                  ))}
+                </TextField>
+              </Grid>
+            </Box>
 
-            <Grid item xs={12} md={4}>
-              <TextField
-                fullWidth
-                label="Unit Price"
-                type="number"
-                {...register("unitPrice", { required: "Unit price is required" })}
-                error={!!errors.unitPrice}
-                helperText={errors.unitPrice?.message}
-                InputProps={{ startAdornment: "$" }}
-              />
-            </Grid>
+            {/* Packaging */}
+            <Box
+              display="grid"
+              gridTemplateColumns={{ xs: "1fr", md: "1fr 2fr" }}
+              gap={3}
+              mx="auto"
+              sx={{ width: { xs: "100%", lg: "50%" } }}
+              alignItems="center"
+              justifyContent="center"
+            >
+              <Grid sx={{ display: "flex", flexDirection: { xs: "row", md: "row-reverse" }, fontWeight: 600 }}>
+                Packaging
+              </Grid>
+              <Grid item xs={6}>
+                <TextField
+                  fullWidth
+                  {...register("packaging")}
+                  placeholder="e.g., Box of 10, Pack of 50"
+                />
+              </Grid>
+            </Box>
 
-            <Grid item xs={12} md={4}>
-              <TextField
-                fullWidth
-                label="Wholesale Price"
-                type="number"
-                {...register("wholesalePrice", {
-                  required: "Wholesale price is required",
-                })}
-                error={!!errors.wholesalePrice}
-                helperText={errors.wholesalePrice?.message}
-                InputProps={{ startAdornment: "$" }}
-              />
-            </Grid>
+            {/* Unit Price */}
+            <Box
+              display="grid"
+              gridTemplateColumns={{ xs: "1fr", md: "1fr 2fr" }}
+              gap={3}
+              mx="auto"
+              sx={{ width: { xs: "100%", lg: "50%" } }}
+              alignItems="center"
+              justifyContent="center"
+            >
+              <Grid sx={{ display: "flex", flexDirection: { xs: "row", md: "row-reverse" }, fontWeight: 600 }}>
+                Unit Price
+              </Grid>
+              <Grid item xs={6}>
+                <TextField
+                  fullWidth
+                  type="number"
+                  {...register("unitPrice", { required: "Unit price is required" })}
+                  error={!!errors.unitPrice}
+                  helperText={errors.unitPrice?.message}
+                  InputProps={{ startAdornment: "$" }}
+                />
+              </Grid>
+            </Box>
 
-            <Grid item xs={12} md={4}>
-              <TextField
-                fullWidth
-                label="Actual Price"
-                type="number"
-                {...register("actualPrice", {
-                  required: "Actual price is required",
-                })}
-                error={!!errors.actualPrice}
-                helperText={errors.actualPrice?.message}
-                InputProps={{ startAdornment: "$" }}
-              />
-            </Grid>
+            {/* Wholesale Price */}
+            <Box
+              display="grid"
+              gridTemplateColumns={{ xs: "1fr", md: "1fr 2fr" }}
+              gap={3}
+              mx="auto"
+              sx={{ width: { xs: "100%", lg: "50%" } }}
+              alignItems="center"
+              justifyContent="center"
+            >
+              <Grid sx={{ display: "flex", flexDirection: { xs: "row", md: "row-reverse" }, fontWeight: 600 }}>
+                Wholesale Price
+              </Grid>
+              <Grid item xs={6}>
+                <TextField
+                  fullWidth
+                  type="number"
+                  {...register("wholesalePrice", { required: "Wholesale price is required" })}
+                  error={!!errors.wholesalePrice}
+                  helperText={errors.wholesalePrice?.message}
+                  InputProps={{ startAdornment: "$" }}
+                />
+              </Grid>
+            </Box>
 
-            <Grid item xs={12} md={6}>
-              <TextField fullWidth label="Origin" {...register("origin")} placeholder="Country of origin" />
-            </Grid>
+            {/* Actual Price */}
+            <Box
+              display="grid"
+              gridTemplateColumns={{ xs: "1fr", md: "1fr 2fr" }}
+              gap={3}
+              mx="auto"
+              sx={{ width: { xs: "100%", lg: "50%" } }}
+              alignItems="center"
+              justifyContent="center"
+            >
+              <Grid sx={{ display: "flex", flexDirection: { xs: "row", md: "row-reverse" }, fontWeight: 600 }}>
+                Actual Price
+              </Grid>
+              <Grid item xs={6}>
+                <TextField
+                  fullWidth
+                  type="number"
+                  {...register("actualPrice", { required: "Actual price is required" })}
+                  error={!!errors.actualPrice}
+                  helperText={errors.actualPrice?.message}
+                  InputProps={{ startAdornment: "$" }}
+                />
+              </Grid>
+            </Box>
 
-            <Grid item xs={12} md={6}>
-              <TextField fullWidth label="QR/ID Code" {...register("qrId")} placeholder="Barcode or QR code" />
-            </Grid>
+            {/* Origin */}
+            <Box
+              display="grid"
+              gridTemplateColumns={{ xs: "1fr", md: "1fr 2fr" }}
+              gap={3}
+              mx="auto"
+              sx={{ width: { xs: "100%", lg: "50%" } }}
+              alignItems="center"
+              justifyContent="center"
+            >
+              <Grid sx={{ display: "flex", flexDirection: { xs: "row", md: "row-reverse" }, fontWeight: 600 }}>
+                Origin
+              </Grid>
+              <Grid item xs={6}>
+                <TextField fullWidth {...register("origin")} placeholder="Country of origin" />
+              </Grid>
+            </Box>
 
-            <Grid item xs={12}>
-              <TextField
-                fullWidth
-                label="Description"
-                multiline
-                rows={4}
-                {...register("description")}
-                placeholder="Detailed description of the item..."
-              />
-            </Grid>
+            {/* QR/ID Code */}
+            <Box
+              display="grid"
+              gridTemplateColumns={{ xs: "1fr", md: "1fr 2fr" }}
+              gap={3}
+              mx="auto"
+              sx={{ width: { xs: "100%", lg: "50%" } }}
+              alignItems="center"
+              justifyContent="center"
+            >
+              <Grid sx={{ display: "flex", flexDirection: { xs: "row", md: "row-reverse" }, fontWeight: 600 }}>
+                QR/ID Code
+              </Grid>
+              <Grid item xs={6}>
+                <TextField fullWidth {...register("qrId")} placeholder="Barcode or QR code" />
+              </Grid>
+            </Box>
+            <Box
+              display="grid"
+              gridTemplateColumns={{ xs: "1fr", md: "1fr 2fr" }}
+              gap={3}
+              mx="auto"
+              sx={{ width: { xs: "100%", lg: "50%" } }}
+              alignItems="center"
+              justifyContent="center"
+            >
+              <Grid
+    sx={{
+      display: "flex",
+      flexDirection: { xs: "row", md: "row-reverse" },
+      fontWeight: 600,
+    }}
+  >
+    Upload Image
+  </Grid>
 
-            <Grid item xs={12}>
-              <Box sx={{ display: "flex", gap: 2, justifyContent: "flex-end" }}>
-                <Button variant="outlined" onClick={() => navigate("/items")} disabled={isLoading}>
-                  Cancel
-                </Button>
-                <Button type="submit" variant="contained" startIcon={<SaveIcon />} disabled={isLoading}>
-                  {isLoading ? "Saving..." : "Save Item"}
-                </Button>
-              </Box>
-            </Grid>
+  {/* File Input */}
+  <Grid item xs={6}>
+    <TextField
+      type="file"
+      accept="image/*"
+      {...register("imageFile")}
+      style={{ width: "100%" }}
+    />
+  </Grid>
+            </Box>
+
+            {/* Description */}
+            <Box
+              display="grid"
+              gridTemplateColumns={{ xs: "1fr", md: "1fr 2fr" }}
+              gap={3}
+              mx="auto"
+              sx={{ width: { xs: "100%", lg: "50%" } }}
+              alignItems="center"
+              justifyContent="center"
+            >
+              <Grid sx={{ display: "flex", flexDirection: { xs: "row", md: "row-reverse" }, fontWeight: 600 }}>
+                Description
+              </Grid>
+              <Grid item xs={6}>
+                <TextField fullWidth multiline rows={4} {...register("description")} placeholder="Detailed description of the item..." />
+              </Grid>
+            </Box>
+
+            {/* Buttons */}
+            <Box display="grid" gridTemplateColumns="1fr" gap={3} mx="auto" sx={{ width: { xs: "100%", lg: "50%" } }}>
+              <Grid item>
+                <Box sx={{ display: "flex", justifyContent: "flex-end", gap: 2, width: "100%" }}>
+                  <Button variant="outlined" onClick={() => navigate("/items")} disabled={isLoading}>
+                    Cancel
+                  </Button>
+                  <Button type="submit" variant="contained" startIcon={<SaveIcon />} disabled={isLoading}>
+                    {isLoading ? "Saving..." : "Save Item"}
+                  </Button>
+                </Box>
+              </Grid>
+            </Box>
+
           </Grid>
         </form>
       </Paper>

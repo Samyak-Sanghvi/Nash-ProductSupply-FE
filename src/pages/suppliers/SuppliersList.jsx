@@ -25,6 +25,7 @@ import {
   DialogContent,
   DialogContentText,
   DialogActions,
+  Switch,
 } from "@mui/material"
 import AddIcon from "@mui/icons-material/Add"
 import EditIcon from "@mui/icons-material/Edit"
@@ -185,7 +186,7 @@ function SuppliersList() {
 
         <TableContainer  sx={{ maxHeight: 300 }}>
           <Table  stickyHeader aria-label="sticky table">
-            <TableHead>
+            <TableHead >
               <TableRow>
                 <TableCell sx={{ fontWeight: 600 }}>Supplier ID</TableCell>
                 <TableCell sx={{ fontWeight: 600 }}>Name</TableCell>
@@ -212,11 +213,22 @@ function SuppliersList() {
                     <TableCell>{supplier.email}</TableCell>
                     <TableCell>{supplier.contactNo}</TableCell>
                     <TableCell>
-                      <Chip
+                      {/* <Chip
                         label={supplier.status}
                         color={supplier.status === "Active" ? "success" : "default"}
                         size="small"
-                      />
+                      /> */}
+                        <Box display="flex" alignItems="center" gap={1}>
+    <Switch
+      checked={supplier.status === "Active"} // active = on, inactive = off
+      color="success"
+      disabled // read-only
+      inputProps={{ "aria-label": "status switch" }}
+    />
+    <Typography variant="body2">
+      {supplier.status}
+    </Typography>
+  </Box>
                     </TableCell>
                     <TableCell align="right">
                       <IconButton

@@ -37,6 +37,27 @@ const theme = createTheme({
     },
   },
   components: {
+     MuiTextField: {
+      defaultProps: {
+        size: "small", // all TextFields will be small by default
+      },
+      styleOverrides: {
+        root: {
+          "& .MuiInputBase-root": {
+           
+            height: "36px",     // input height
+          },
+          "& .MuiInputBase-input": {
+            
+          },
+            "& .MuiInputBase-multiline": {
+          
+            lineHeight: 1.5,
+            minHeight: "80px", // minimum height for multiline
+          },
+        },
+      },
+    },
     MuiButton: {
       styleOverrides: {
         root: {

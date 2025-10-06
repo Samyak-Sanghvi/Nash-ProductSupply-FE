@@ -3,7 +3,17 @@
 import { useNavigate, useParams } from "react-router-dom"
 import { useForm } from "react-hook-form"
 import { useEffect } from "react"
-import { Box, Typography, Paper, TextField, Button, Grid, MenuItem, CircularProgress, Alert } from "@mui/material"
+import {
+  Box,
+  Typography,
+  Paper,
+  TextField,
+  Button,
+  Grid,
+  MenuItem,
+  CircularProgress,
+  Alert,
+} from "@mui/material"
 import ArrowBackIcon from "@mui/icons-material/ArrowBack"
 import SaveIcon from "@mui/icons-material/Save"
 import { useGetSupplierByIdQuery, useUpdateSupplierMutation } from "../../store/api/suppliersApi"
@@ -16,7 +26,6 @@ function EditSupplier() {
   const { showNotification } = useNotification()
 
   const { data: supplier, isLoading, isError, error } = useGetSupplierByIdQuery(id)
-
   const [updateSupplier, { isLoading: isUpdating }] = useUpdateSupplierMutation()
 
   const {
@@ -27,33 +36,27 @@ function EditSupplier() {
   } = useForm()
 
   useEffect(() => {
-    if (supplier) {
-      reset(supplier)
-    }
+    if (supplier) reset(supplier)
   }, [supplier, reset])
 
   const onSubmit = async (data) => {
     try {
       await updateSupplier({ id, ...data }).unwrap()
-      showNotification({
-        message: "Supplier updated successfully",
-        type: "success",
-      })
+      showNotification({ message: "Supplier updated successfully", type: "success" })
       navigate("/suppliers")
     } catch (err) {
       handleApiError(err, showNotification)
     }
   }
 
-  if (isLoading) {
+  if (isLoading)
     return (
       <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center", minHeight: 400 }}>
         <CircularProgress />
       </Box>
     )
-  }
 
-  if (isError) {
+  if (isError)
     return (
       <Box>
         <Alert severity="error" sx={{ mb: 2 }}>
@@ -64,7 +67,6 @@ function EditSupplier() {
         </Button>
       </Box>
     )
-  }
 
   return (
     <Box>
@@ -76,80 +78,161 @@ function EditSupplier() {
         Edit Supplier
       </Typography>
 
-      <Paper sx={{ p: 4 }}>
-        <form onSubmit={handleSubmit(onSubmit)}>
+      <Paper sx={{ p: 4, width: "100%" }}>
+        <form style={{ width: "100%" }} onSubmit={handleSubmit(onSubmit)}>
           <Grid container spacing={3}>
-            <Grid item xs={12} md={6}>
-              <TextField
-                fullWidth
-                label="Supplier Name"
-                {...register("name", { required: "Name is required" })}
-                error={!!errors.name}
-                helperText={errors.name?.message}
-              />
-            </Grid>
+            {/* Unique ID */}
+            <Box
+              display="grid"
+              gridTemplateColumns={{ xs: "1fr", md: "1fr 2fr" }}
+              gap={3}
+              mx="auto"
+              sx={{ width: { xs: "100%", lg: "50%" } }}
+              alignItems="center"
+            >
+              <Grid sx={{ width: "100%", display: "flex", flexDirection: { xs: "row", md: "row-reverse" }, fontWeight: 600 }}>
+                Unique ID
+              </Grid>
+              <Grid item xs={6}>
+                <TextField fullWidth {...register("uniqueId")} disabled />
+              </Grid>
+            </Box>
 
-            <Grid item xs={12} md={6}>
-              <TextField fullWidth label="Unique ID" {...register("uniqueId")} disabled />
-            </Grid>
+            {/* Supplier Name */}
+            <Box
+              display="grid"
+              gridTemplateColumns={{ xs: "1fr", md: "1fr 2fr" }}
+              gap={3}
+              mx="auto"
+              sx={{ width: { xs: "100%", lg: "50%" } }}
+              alignItems="center"
+            >
+              <Grid sx={{ width: "100%", display: "flex", flexDirection: { xs: "row", md: "row-reverse" }, fontWeight: 600 }}>
+                Supplier Name
+              </Grid>
+              <Grid item xs={6}>
+                <TextField
+                  fullWidth
+                  {...register("name", { required: "Supplier Name is required" })}
+                  error={!!errors.name}
+                  helperText={errors.name?.message}
+                  placeholder="Supplier Name"
+                />
+              </Grid>
+            </Box>
 
-            <Grid item xs={12} md={6}>
-              <TextField
-                fullWidth
-                label="Email"
-                type="email"
-                {...register("email", {
-                  required: "Email is required",
-                  pattern: {
-                    value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                    message: "Invalid email address",
-                  },
-                })}
-                error={!!errors.email}
-                helperText={errors.email?.message}
-              />
-            </Grid>
+            {/* Email */}
+            <Box
+              display="grid"
+              gridTemplateColumns={{ xs: "1fr", md: "1fr 2fr" }}
+              gap={3}
+              mx="auto"
+              sx={{ width: { xs: "100%", lg: "50%" } }}
+              alignItems="center"
+            >
+              <Grid sx={{ width: "100%", display: "flex", flexDirection: { xs: "row", md: "row-reverse" }, fontWeight: 600 }}>
+                Email
+              </Grid>
+              <Grid item xs={6}>
+                <TextField
+                  fullWidth
+                  type="email"
+                  {...register("email", {
+                    required: "Email is required",
+                    pattern: { value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i, message: "Invalid email address" },
+                  })}
+                  error={!!errors.email}
+                  helperText={errors.email?.message}
+                  placeholder="Email"
+                />
+              </Grid>
+            </Box>
 
-            <Grid item xs={12} md={6}>
-              <TextField
-                fullWidth
-                label="Contact Number"
-                {...register("contactNo", {
-                  required: "Contact number is required",
-                })}
-                error={!!errors.contactNo}
-                helperText={errors.contactNo?.message}
-              />
-            </Grid>
+            {/* Contact Number */}
+            <Box
+              display="grid"
+              gridTemplateColumns={{ xs: "1fr", md: "1fr 2fr" }}
+              gap={3}
+              mx="auto"
+              sx={{ width: { xs: "100%", lg: "50%" } }}
+              alignItems="center"
+            >
+              <Grid sx={{ width: "100%", display: "flex", flexDirection: { xs: "row", md: "row-reverse" }, fontWeight: 600 }}>
+                Contact Number
+              </Grid>
+              <Grid item xs={6}>
+                <TextField
+                  fullWidth
+                  {...register("contactNo", { required: "Contact number is required" })}
+                  error={!!errors.contactNo}
+                  helperText={errors.contactNo?.message}
+                  placeholder="Contact Number"
+                />
+              </Grid>
+            </Box>
 
-            <Grid item xs={12} md={6}>
-              <TextField fullWidth select label="Status" {...register("status")}>
-                <MenuItem value="Active">Active</MenuItem>
-                <MenuItem value="Inactive">Inactive</MenuItem>
-              </TextField>
-            </Grid>
+            {/* Status */}
+            <Box
+              display="grid"
+              gridTemplateColumns={{ xs: "1fr", md: "1fr 2fr" }}
+              gap={3}
+              mx="auto"
+              sx={{ width: { xs: "100%", lg: "50%" } }}
+              alignItems="center"
+            >
+              <Grid sx={{ width: "100%", display: "flex", flexDirection: { xs: "row", md: "row-reverse" }, fontWeight: 600 }}>
+                Status
+              </Grid>
+              <Grid item xs={6}>
+                <TextField select fullWidth {...register("status")}>
+                  <MenuItem value="Active">Active</MenuItem>
+                  <MenuItem value="Inactive">Inactive</MenuItem>
+                </TextField>
+              </Grid>
+            </Box>
 
-            <Grid item xs={12}>
-              <TextField
-                fullWidth
-                label="Other Details"
-                multiline
-                rows={4}
-                {...register("otherDetails")}
-                placeholder="Additional information about the supplier..."
-              />
-            </Grid>
+            {/* Other Details */}
+            <Box
+              display="grid"
+              gridTemplateColumns={{ xs: "1fr", md: "1fr 2fr" }}
+              gap={3}
+              mx="auto"
+              sx={{ width: { xs: "100%", lg: "50%" } }}
+              alignItems="center"
+            >
+              <Grid sx={{ width: "100%", display: "flex", flexDirection: { xs: "row", md: "row-reverse" }, fontWeight: 600 }}>
+                Other Details
+              </Grid>
+              <Grid item xs={6}>
+                <TextField
+                  fullWidth
+                  multiline
+                  rows={4}
+                  {...register("otherDetails")}
+                  placeholder="Additional information about the supplier..."
+                />
+              </Grid>
+            </Box>
 
-            <Grid item xs={12}>
-              <Box sx={{ display: "flex", gap: 2, justifyContent: "flex-end" }}>
-                <Button variant="outlined" onClick={() => navigate("/suppliers")} disabled={isUpdating}>
-                  Cancel
-                </Button>
-                <Button type="submit" variant="contained" startIcon={<SaveIcon />} disabled={isUpdating}>
-                  {isUpdating ? "Updating..." : "Update Supplier"}
-                </Button>
-              </Box>
-            </Grid>
+            {/* Buttons */}
+            <Box
+              display="grid"
+              gridTemplateColumns={{ xs: "1fr" }}
+              gap={3}
+              mx="auto"
+              sx={{ width: { xs: "100%", lg: "50%" } }}
+            >
+              <Grid item>
+                <Box sx={{ display: "flex", justifyContent: "flex-end", gap: 2, width: "100%" }}>
+                  <Button variant="outlined" onClick={() => navigate("/suppliers")} disabled={isUpdating}>
+                    Cancel
+                  </Button>
+                  <Button type="submit" variant="contained" startIcon={<SaveIcon />} disabled={isUpdating}>
+                    {isUpdating ? "Updating..." : "Update Supplier"}
+                  </Button>
+                </Box>
+              </Grid>
+            </Box>
           </Grid>
         </form>
       </Paper>

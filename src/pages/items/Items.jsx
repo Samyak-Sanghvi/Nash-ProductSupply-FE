@@ -179,8 +179,9 @@ function ItemsList() {
                       <Chip label={`$${item.actualPrice}`} color="primary" size="small" />
                     </TableCell>
                     <TableCell>{item.origin}</TableCell>
-                    <TableCell align="right">
-                      <IconButton size="small" color="primary" onClick={() => navigate(`/items/edit/${item.id}`)}>
+                    <TableCell align="right" >
+                     
+                      <IconButton size="small"  color="primary" onClick={() => navigate(`/items/edit/${item.id}`)}>
                         <EditIcon />
                       </IconButton>
                       <IconButton
@@ -191,6 +192,7 @@ function ItemsList() {
                       >
                         <DeleteIcon />
                       </IconButton>
+                     
                     </TableCell>
                   </TableRow>
                 ))

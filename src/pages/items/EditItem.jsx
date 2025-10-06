@@ -64,18 +64,18 @@ function EditItem() {
     )
   }
 
-  if (itemError) {
-    return (
-      <Box>
-        <Alert severity="error" sx={{ mb: 2 }}>
-          {itemError?.data?.message || "Failed to load item"}
-        </Alert>
-        <Button startIcon={<ArrowBackIcon />} onClick={() => navigate("/items")}>
-          Back to Items
-        </Button>
-      </Box>
-    )
-  }
+  // if (itemError) {
+  //   return (
+  //     <Box>
+  //       <Alert severity="error" sx={{ mb: 2 }}>
+  //         {itemError?.data?.message || "Failed to load item"}
+  //       </Alert>
+  //       <Button startIcon={<ArrowBackIcon />} onClick={() => navigate("/items")}>
+  //         Back to Items
+  //       </Button>
+  //     </Box>
+  //   )
+  // }
 
   return (
     <Box>
