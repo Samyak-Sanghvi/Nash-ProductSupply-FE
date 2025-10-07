@@ -7,7 +7,7 @@ import EditSupplier from "./pages/suppliers/EditSupplier"
 // import SupplierListUpload from "./pages/SupplierListUpload"
 // import Quotations from "./pages/Quotations"
 import MainLayout from "./components/layout/MainLayout"
-import ItemsList from "./pages/items/items"
+import ItemsList from "./pages/items/ItemsList"
 import AddItem from "./pages/items/AddItem"
 import EditItem from "./pages/items/EditItem"
 
