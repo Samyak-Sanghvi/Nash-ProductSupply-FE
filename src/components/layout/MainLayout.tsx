@@ -18,19 +18,20 @@ function MainLayout() {
 
   return (
     <Box sx={{ display: "flex", minHeight: "100vh" }}>
-      <Header onMenuClick={handleDrawerToggle} drawerWidth={DRAWER_WIDTH} />
+     
       <Sidebar drawerWidth={DRAWER_WIDTH} mobileOpen={mobileOpen} onDrawerToggle={handleDrawerToggle} />
       <Box
         component="main"
         sx={{
           flexGrow: 1,
           p: 3,
-          width: { sm: `calc(100% - ${DRAWER_WIDTH}px)` },
-          mt: 8,
+          width: { sm: `calc(100% - ${DRAWER_WIDTH}px ) ` },
+          mt: 7,
           backgroundColor: "background.default",
           minHeight: "100vh",
         }}
       >
+         <Header onMenuClick={handleDrawerToggle} drawerWidth={DRAWER_WIDTH} />
         <Outlet />
       </Box>
     </Box>

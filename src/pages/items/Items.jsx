@@ -33,11 +33,16 @@ import SearchIcon from "@mui/icons-material/Search"
 import { useGetItemsQuery, useDeleteItemMutation } from "../../store/api/itemsApi"
 import { useNotification } from "../../hooks/useNotification"
 import { handleApiError } from "../../utils/errorHandler"
+const USE_DUMMY_DATA = true;
+
+const initialProducts = [
+  { id: 101, uniqueId: "ITM-001", name: "Arduino Uno R3", supplierId: 1, unitPrice: 22.50, wholesalePrice: 20.00, actualPrice: 25.00, origin: "Italy" },
+  { id: 102, uniqueId: "ITM-002", name: "Bluetooth Headphones", supplierId: 2, unitPrice: 45.00, wholesalePrice: 40.00, actualPrice: 59.99, origin: "China" },
+];
 
 function ItemsList() {
   const navigate = useNavigate()
   const { showNotification } = useNotification()
-  const [searchTerm, setSearchTerm] = useState("")
   const [page, setPage] = useState(0)
   const [rowsPerPage, setRowsPerPage] = useState(10)
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false)
@@ -46,8 +51,25 @@ function ItemsList() {
   const { data, isLoading, isError, error, refetch } = useGetItemsQuery({
     page: page + 1,
     limit: rowsPerPage,
-    search: searchTerm,
+    // search: searchTerm,
   })
+   const [localItems, setLocalItems] = useState(() => {
+        if (!USE_DUMMY_DATA) return [];
+        try {
+            const storedProducts = localStorage.getItem("dummyProducts");
+            // If data exists in localStorage, use it.
+            if (storedProducts) {
+                return JSON.parse(storedProducts);
+            } else {
+                // Otherwise, seed localStorage with initial data and then use it.
+                localStorage.setItem("dummyProducts", JSON.stringify(initialProducts));
+                return initialProducts;
+            }
+        } catch (error) {
+            console.error("Error with localStorage", error);
+            return initialProducts;
+        }
+    });
 
   const [deleteItem, { isLoading: isDeleting }] = useDeleteItemMutation()
 
@@ -66,6 +88,14 @@ function ItemsList() {
   }
 
   const handleDeleteConfirm = async () => {
+      // REMOVE Y=THIS BLOCK IF NOT USING DUMMY DATA
+     if (USE_DUMMY_DATA) {
+      setLocalItems(prev => prev.filter(s => s.id !== localItems.id));
+      localStorage.setItem("dummyProducts", JSON.stringify(localItems.filter(s => s.id !== selectedSupplier.id)));
+      setDeleteDialogOpen(false);
+      setLocalItems(null);
+      // showNotification...
+    }   else{  // ----T=TILL
     try {
       await deleteItem(selectedItem.id).unwrap()
       showNotification({
@@ -77,7 +107,7 @@ function ItemsList() {
     } catch (err) {
       handleApiError(err, showNotification)
     }
-  }
+  }}
 
   if (isLoading) {
     return (
@@ -101,7 +131,8 @@ function ItemsList() {
 //     )
 //   }
 
-  const items = data?.data || []
+  // const items = data?.data || []
+  const items = localItems || []
   const totalCount = data?.total || 0
 
   return (
@@ -128,7 +159,7 @@ function ItemsList() {
       </Box>
 
       <Paper sx={{ p: 3 }}>
-        <Box sx={{ mb: 3 }}>
+        {/* <Box sx={{ mb: 3 }}>
           <TextField
             fullWidth
             placeholder="Search items by name, supplier, or ID..."
@@ -142,20 +173,20 @@ function ItemsList() {
               ),
             }}
           />
-        </Box>
+        </Box> */}
 
-        <TableContainer>
-          <Table>
-            <TableHead>
+        <TableContainer sx={{ maxHeight: 300 }}>
+          <Table stickyHeader aria-label="sticky table">
+            <TableHead sx={{letterSpacing: "0.05em"}}>
               <TableRow>
-                <TableCell sx={{ fontWeight: 600 }}>Item ID</TableCell>
-                <TableCell sx={{ fontWeight: 600 }}>Name</TableCell>
-                <TableCell sx={{ fontWeight: 600 }}>Supplier</TableCell>
-                <TableCell sx={{ fontWeight: 600 }}>Unit Price</TableCell>
-                <TableCell sx={{ fontWeight: 600 }}>Wholesale</TableCell>
-                <TableCell sx={{ fontWeight: 600 }}>Actual Price</TableCell>
-                <TableCell sx={{ fontWeight: 600 }}>Origin</TableCell>
-                <TableCell sx={{ fontWeight: 600 }} align="right">
+                <TableCell sx={{ fontWeight: 600,textAlign:"center", bgcolor:"primary.light",letterSpacing: "0.05em", }}>Item ID</TableCell>
+                <TableCell sx={{ fontWeight: 600 ,textAlign:"center",}}>Name</TableCell>
+                <TableCell sx={{ fontWeight: 600,textAlign:"center", bgcolor:"primary.light",letterSpacing: "0.05em",}}>Supplier</TableCell>
+                <TableCell sx={{ fontWeight: 600,textAlign:"center", }}>Unit Price</TableCell>
+                <TableCell sx={{ fontWeight: 600 ,textAlign:"center", bgcolor:"primary.light",letterSpacing: "0.05em",}}>Wholesale</TableCell>
+                <TableCell sx={{ fontWeight: 600 ,textAlign:"center",}}>Actual Price</TableCell>
+                <TableCell sx={{ fontWeight: 600 ,textAlign:"center", bgcolor:"primary.light",letterSpacing: "0.05em",}}>Origin</TableCell>
+                <TableCell sx={{ fontWeight: 600,textAlign:"center", }} align="right">
                   Actions
                 </TableCell>
               </TableRow>

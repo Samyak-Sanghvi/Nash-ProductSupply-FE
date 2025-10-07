@@ -9,7 +9,7 @@ import { useCreateItemMutation } from "../../store/api/itemsApi"
 import { useGetSuppliersQuery } from "../../store/api/suppliersApi"
 import { useNotification } from "../../hooks/useNotification"
 import { handleApiError } from "../../utils/errorHandler"
-
+const USE_DUMMY_DATA = true;
 function AddItem() {
   const navigate = useNavigate()
   const { showNotification } = useNotification()
@@ -24,8 +24,32 @@ function AddItem() {
     handleSubmit,
     formState: { errors },
   } = useForm()
+  //  const [suppliers, setSuppliers] = useState([]);
+   
 
   const onSubmit = async (data) => {
+     if (USE_DUMMY_DATA) {
+      try {
+        const storedItems = JSON.parse(localStorage.getItem("dummyProducts") || "[]");
+        const newItem = {
+          ...data,
+          id: Date.now(), // Create a simple unique ID
+          // Ensure prices are numbers
+          price: parseFloat(data.price),
+          unitPrice: parseFloat(data.unitPrice),
+          wholesalePrice: parseFloat(data.wholesalePrice),
+          actualPrice: parseFloat(data.actualPrice),
+        };
+        const updatedItems = [...storedItems, newItem];
+        localStorage.setItem("dummyProducts", JSON.stringify(updatedItems));
+        
+        showNotification({ message: "Item saved to local storage", type: "success" });
+        navigate("/items"); // Assuming you have an /items route
+      } catch (err) {
+        showNotification({ message: "Failed to save dummy data", type: "error" });
+        console.error(err);
+      }
+    } else {
     try {
       await createItem(data).unwrap()
       showNotification({
@@ -36,7 +60,7 @@ function AddItem() {
     } catch (err) {
       handleApiError(err, showNotification)
     }
-  }
+  }}
 
   return (
     <Box>
@@ -118,7 +142,9 @@ function AddItem() {
                   fullWidth
                   select
                   defaultValue=""
-                  {...register("supplierId", { required: "Supplier is required" })}
+                  {...register("supplierId",
+                    //  { required: "Supplier is required" }
+                    )}
                   error={!!errors.supplierId}
                   helperText={errors.supplierId?.message}
                 >

@@ -53,17 +53,30 @@ function Sidebar({ drawerWidth, mobileOpen, onDrawerToggle }) {
           const isActive = location.pathname === item.path
           return (
             <ListItem key={item.text} disablePadding sx={{ mb: 0.5 }}>
-              <ListItemButton
-                onClick={() => navigate(item.path)}
-                sx={{
-                  borderRadius: 2,
-                  backgroundColor: isActive ? "primary.main" : "transparent",
-                  color: isActive ? "white" : "text.primary",
-                  "&:hover": {
-                    backgroundColor: isActive ? "primary.dark" : "action.hover",
-                  },
-                }}
-              >
+            <ListItemButton
+  onClick={() => navigate(item.path)}
+  sx={{
+    borderRadius: 2,
+    marginInline: "0.75rem",
+    marginBlock: "0.25rem",
+    transition: "all 0.3s ease",
+    background: isActive
+      ? "linear-gradient(270deg, rgba(115, 103, 240, 0.7) 0%, rgba(115, 103, 240, 1) 100%)"
+      : "transparent",
+    boxShadow: isActive
+      ? "0 0.125rem 0.375rem 0 rgba(115, 103, 240, 0.3)"
+      : "none",
+    color: isActive ? "white" : "text.primary",
+    "&:hover": {
+      background: isActive
+        ? "linear-gradient(270deg, rgba(115, 103, 240, 0.85) 0%, rgba(115, 103, 240, 1) 100%)"
+        : "rgba(115, 103, 240, 0.08)",
+      boxShadow: isActive
+        ? "0 0.2rem 0.5rem 0 rgba(115, 103, 240, 0.4)"
+        : "none",
+    },
+  }}
+>
                 <ListItemIcon
                   sx={{
                     color: isActive ? "white" : "text.secondary",

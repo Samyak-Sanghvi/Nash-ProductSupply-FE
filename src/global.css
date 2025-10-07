@@ -11,12 +11,12 @@
 }
 
 *::-webkit-scrollbar-thumb {
-  background-color: #1976d2;  /* primary color */
+  background-color: #7367f0;  /* primary color */
   border-radius: 2px;         /* rounded ends */
 }
 
 *::-webkit-scrollbar-thumb:hover {
-  background-color: #115293;  /* darker on hover */
+  background-color: #6e61fb;  /* darker on hover */
 }
 
 /* Hide scrollbar buttons (triangles) */
@@ -29,5 +29,5 @@
 /* Firefox */
 * {
   scrollbar-width: thin;
-  scrollbar-color: #1976d2 transparent;
+  scrollbar-color: #7367f0 transparent;
 }

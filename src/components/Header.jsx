@@ -10,11 +10,12 @@ function Header({ onMenuClick, drawerWidth }) {
     <AppBar
       position="fixed"
       sx={{
-        width: { sm: `calc(100% - ${drawerWidth}px)` },
-        ml: { sm: `${drawerWidth}px` },
+        width: { sm: `calc(100% - ${drawerWidth}px )` },
+       ml: { sm: `calc(${drawerWidth}px )` },
         backgroundColor: "white",
         color: "text.primary",
         boxShadow: "0 1px 3px rgba(0,0,0,0.08)",
+        
       }}
     >
       <Toolbar>

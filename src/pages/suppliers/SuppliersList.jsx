@@ -26,6 +26,7 @@ import {
   DialogContentText,
   DialogActions,
   Switch,
+  Tooltip,
 } from "@mui/material"
 import AddIcon from "@mui/icons-material/Add"
 import EditIcon from "@mui/icons-material/Edit"
@@ -34,6 +35,9 @@ import SearchIcon from "@mui/icons-material/Search"
 import { useGetSuppliersQuery, useDeleteSupplierMutation } from "../../store/api/suppliersApi"
 import { useNotification } from "../../hooks/useNotification"
 import { handleApiError } from "../../utils/errorHandler"
+import FilterListIcon from "@mui/icons-material/FilterList";
+import FilterAltIcon from '@mui/icons-material/FilterAlt';
+
 
 
 // Default data to seed localStorage if it's empty
@@ -47,16 +51,16 @@ const USE_DUMMY_DATA = true;
 function SuppliersList() {
   const navigate = useNavigate()
   const { showNotification } = useNotification()
-  const [searchTerm, setSearchTerm] = useState("")
   const [page, setPage] = useState(0)
   const [rowsPerPage, setRowsPerPage] = useState(10)
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false)
   const [selectedSupplier, setSelectedSupplier] = useState(null)
+  const [isActive, setIsActive] = useState(false);
 
   const { data, isLoading, isError, error, refetch } = useGetSuppliersQuery({
     page: page + 1,
     limit: rowsPerPage,
-    search: searchTerm,
+   
   })
 
   // --- MODIFIED: Manage suppliers state with localStorage ---
@@ -167,7 +171,7 @@ function SuppliersList() {
       </Box>
 
       <Paper sx={{ p: 3 }}>
-        <Box sx={{ mb: 3 }}>
+        {/* <Box sx={{ mb: 3 }}>
           <TextField
             fullWidth
             placeholder="Search suppliers by name, email, or ID..."
@@ -182,18 +186,38 @@ function SuppliersList() {
             }}
             sx={{p:1}}
           />
-        </Box>
+        </Box> */}
+          <Box sx={{ display: "flex", justifyContent: "flex-end", alignItems: "center", mb: 2 }}>
+    <Tooltip title="Filter Suppliers">
+      <IconButton
+        onClick={() => setIsActive(!isActive)}
+        sx={{
+          backgroundColor: isActive ? "primary.main" : "primary.light",
+          color: isActive ? "white" : "primary.main",
+          border: isActive ? "0px solid" : "none",
+          borderColor:  "primary.main" ,
+          transition: "0.3s ease",
+          "&:hover": {
+            backgroundColor: isActive ? "primary.dark" : "primary.light",
+          },
+        }}
+      >
+        <FilterAltIcon />
+      </IconButton>
+    </Tooltip>
+
+  </Box>
 
         <TableContainer  sx={{ maxHeight: 300 }}>
           <Table  stickyHeader aria-label="sticky table">
-            <TableHead >
+            <TableHead sx={{letterSpacing: "0.05em"}}>
               <TableRow>
-                <TableCell sx={{ fontWeight: 600 }}>Supplier ID</TableCell>
-                <TableCell sx={{ fontWeight: 600 }}>Name</TableCell>
-                <TableCell sx={{ fontWeight: 600 }}>Email</TableCell>
-                <TableCell sx={{ fontWeight: 600 }}>Contact No</TableCell>
-                <TableCell sx={{ fontWeight: 600 }}>Status</TableCell>
-                <TableCell sx={{ fontWeight: 600 }} align="right">
+                <TableCell sx={{ fontWeight: 600 ,textAlign:"center", bgcolor:"primary.light",letterSpacing: "0.05em", }}>Supplier ID</TableCell>
+                <TableCell sx={{ fontWeight: 600 ,textAlign:"center",}}>Name</TableCell>
+                <TableCell sx={{ fontWeight: 600,textAlign:"center",bgcolor:"primary.light" }}>Email</TableCell>
+                <TableCell sx={{ fontWeight: 600 ,textAlign:"center",}}>Contact No</TableCell>
+                <TableCell sx={{ fontWeight: 600,textAlign:"center",bgcolor:"primary.light" }}>Status</TableCell>
+                <TableCell sx={{ fontWeight: 600,textAlign:"center", }} align="right">
                   Actions
                 </TableCell>
               </TableRow>

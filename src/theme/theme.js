@@ -3,9 +3,9 @@ import { createTheme } from "@mui/material/styles"
 const theme = createTheme({
   palette: {
     primary: {
-      main: "#1976d2",
-      light: "#42a5f5",
-      dark: "#1565c0",
+      main: "#7367f0",//#91C4C3
+      light: "#ede9ff",
+      dark: "#8074ffff",
     },
     secondary: {
       main: "#f50057",
@@ -35,6 +35,7 @@ const theme = createTheme({
       fontWeight: 600,
       fontSize: "1.25rem",
     },
+    h7:{fontWeight: 500 , fontSize: "1rem"}
   },
   components: {
      MuiTextField: {
