@@ -1,6 +1,9 @@
 import { Box, Grid, Card, CardContent, Typography, Paper } from "@mui/material"
 import { Stack, Chip } from "@mui/material"
 import FiberManualRecordIcon from "@mui/icons-material/FiberManualRecord"
+import SupplierImg from "../assets/supplier.png"
+import ProductImg from "../assets/product.png"
+
 
 
 
@@ -58,7 +61,7 @@ function Dashboard() {
         {/* 3D Sphere / Image */}
         <Box
           component="img"
-          src="/sphere-placeholder.png" // replace with your actual image or SVG
+          src="" // replace with your actual image or SVG
           alt="3D Sphere"
           sx={{ width: 100, height: 100 }}
         />
@@ -66,9 +69,34 @@ function Dashboard() {
     </Card>
     <Box sx={{display:"flex",  width:{ xs: "100%", md:"50%"}, gap:3}}>
       <Card sx={{width:"50%" , p:3}} ><Typography variant="h4" fontWeight={500} >Total Suppliers</Typography>
-      <Typography variant="h4" fontWeight={600} mt={3} >50+</Typography></Card>
+      <Typography variant="h4" fontWeight={600} mt={3} >50+</Typography>
+      <Box display={"flex"} alignItems="center" justifyContent="center">
+        <Box
+    component="img"
+    src={SupplierImg} // replace with your image path
+    alt="Suppliers"
+    
+    sx={{
+      width: 100,
+      height: 100,
+      objectFit: "contain",
+    }}
+  /></Box>
+      </Card>
       <Card sx={{width:"50%", p:3}}><Typography variant="h4" fontWeight={500} >Total Items</Typography>
-      <Typography variant="h4" fontWeight={600} mt={3} >100+</Typography></Card>
+      <Typography variant="h4" fontWeight={600} mt={3} >100+</Typography>
+       <Box display={"flex"} alignItems="center" justifyContent="center">
+        <Box
+    component="img"
+    src={ProductImg} // replace with your image path
+    alt="Suppliers"
+    
+    sx={{
+      width: 100,
+      height: 100,
+      objectFit: "contain",
+    }}
+  /></Box></Card>
     </Box>
     </Box>
 

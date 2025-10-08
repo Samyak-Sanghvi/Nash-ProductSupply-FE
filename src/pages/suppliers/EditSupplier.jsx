@@ -56,17 +56,17 @@ function EditSupplier() {
       </Box>
     )
 
-  if (isError)
-    return (
-      <Box>
-        <Alert severity="error" sx={{ mb: 2 }}>
-          {handleApiError(error)}
-        </Alert>
-        <Button variant="contained" onClick={() => navigate("/suppliers")}>
-          Back to Suppliers
-        </Button>
-      </Box>
-    )
+  // if (isError)
+  //   return (
+  //     <Box>
+  //       <Alert severity="error" sx={{ mb: 2 }}>
+  //         {handleApiError(error)}
+  //       </Alert>
+  //       <Button variant="contained" onClick={() => navigate("/suppliers")}>
+  //         Back to Suppliers
+  //       </Button>
+  //     </Box>
+  //   )
 
   return (
     <Box>
