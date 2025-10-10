@@ -3,9 +3,9 @@ import { createTheme } from "@mui/material/styles"
 const theme = createTheme({
   palette: {
     primary: {
-      main: "#7367f0",//#91C4C3
-      light: "#ede9ff",
-      dark: "#8074ffff",
+      main: "#91C4C3",//#91C4C3  //7367f0 for purple
+      light: "#d3e7e7",         //ede9ff
+      dark: "#80bab9ff",        //8074ffff
     },
     secondary: {
       main: "#f50057",
@@ -38,6 +38,30 @@ const theme = createTheme({
     h7:{fontWeight: 500 , fontSize: "1rem"}
   },
   components: {
+      MuiCssBaseline: {
+      styleOverrides: (theme) => ({
+        // Firefox
+        '*': {
+          scrollbarWidth: 'thin',
+          scrollbarColor: `${theme.palette.primary.main} transparent`,
+        },
+        // Chrome, Edge, Safari
+        '*::-webkit-scrollbar': {
+          width: '4px',
+          height: '4px',
+        },
+        '*::-webkit-scrollbar-track': {
+          background: 'transparent',
+        },
+        '*::-webkit-scrollbar-thumb': {
+          backgroundColor: theme.palette.primary.main,
+          borderRadius: '2px',
+        },
+        '*::-webkit-scrollbar-thumb:hover': {
+          backgroundColor: theme.palette.primary.dark, // Use a darker theme color on hover
+        },
+      }),
+    },
      MuiTextField: {
       defaultProps: {
         size: "small", // all TextFields will be small by default

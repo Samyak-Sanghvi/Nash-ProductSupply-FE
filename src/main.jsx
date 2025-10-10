@@ -7,7 +7,7 @@ import { store } from "./store/store";
 import { Provider } from "react-redux";
 import NotificationContainer from "./components/common/NotificationContainer";
 import ErrorBoundary from "./components/common/ErrorBoundary";
-import './global.css';
+// import './global.css';
 
 
 ReactDOM.createRoot(document.getElementById("root")).render(

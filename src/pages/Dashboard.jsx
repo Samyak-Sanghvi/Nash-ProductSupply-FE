@@ -14,17 +14,19 @@ function Dashboard() {
         Dashboard
       </Typography>
       <Box sx={{display:"flex", flexDirection:{xs:"column",md:"row"}, gap:3, width:"100%"  }}>
-   <Card
-      sx={{
-        background: "linear-gradient(135deg, #7B61FF 0%, #5F49E0 100%)",
-        color: "white",
-        borderRadius: 3,
-        p: 3,
-        // width: 400,
-        width:{ xs: "100%", md:"50%"},
-        position: "relative",
-      }}
-    >
+ <Card
+  sx={(theme) => ({
+    // The only change is here
+    background: `linear-gradient(135deg, ${theme.palette.primary.dark} 0%, ${theme.palette.primary.main} 100%)`,
+    
+    // The rest of your styles are perfect
+    color: "white",
+    borderRadius: 3,
+    p: 3,
+    width: { xs: "100%", md: "50%" },
+    position: "relative",
+  })}
+>
       {/* Dots top-right */}
       <Box position="absolute" top={16} right={16} display="flex" gap={0.5}>
         <FiberManualRecordIcon sx={{ fontSize: 8, color: "white" }} />

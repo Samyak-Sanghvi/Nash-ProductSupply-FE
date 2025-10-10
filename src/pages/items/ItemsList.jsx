@@ -206,9 +206,10 @@ function ItemsList() {
                     <TableCell>{item.supplierName || item.supplier}</TableCell>
                     <TableCell>${item.unitPrice}</TableCell>
                     <TableCell>${item.wholesalePrice}</TableCell>
-                    <TableCell>
+                    {/* <TableCell>
                       <Chip label={`$${item.actualPrice}`} color="primary" size="small" />
-                    </TableCell>
+                    </TableCell> */}
+                    <TableCell>${item.actualPrice}</TableCell>
                     <TableCell>{item.origin}</TableCell>
                     <TableCell align="right" >
                      
