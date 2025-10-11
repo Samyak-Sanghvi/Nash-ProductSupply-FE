@@ -5,6 +5,7 @@ import { itemsApi } from "./api/itemsApi"
 // import { quotationsApi } from "./api/quotationsApi"
 // import { supplierListApi } from "./api/supplierListApi"
 import uiReducer from "./slices/uiSlice"
+import { supplierListApi } from "./api/supplierListApi"
 
 export const store = configureStore({
   reducer: {
@@ -12,7 +13,7 @@ export const store = configureStore({
     [suppliersApi.reducerPath]: suppliersApi.reducer,
     [itemsApi.reducerPath]: itemsApi.reducer,
     // [quotationsApi.reducerPath]: quotationsApi.reducer,
-    // [supplierListApi.reducerPath]: supplierListApi.reducer,
+    [supplierListApi.reducerPath]: supplierListApi.reducer,
 
     // Regular slices
     ui: uiReducer,
@@ -22,7 +23,7 @@ export const store = configureStore({
       .concat(suppliersApi.middleware)
       .concat(itemsApi.middleware)
     //   .concat(quotationsApi.middleware)
-    //   .concat(supplierListApi.middleware),
+      .concat(supplierListApi.middleware),
 })
 
 // Enable refetchOnFocus/refetchOnReconnect behaviors

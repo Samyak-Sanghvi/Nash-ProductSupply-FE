@@ -4,7 +4,7 @@ import SuppliersList from "./pages/suppliers/SuppliersList"
 import AddSupplier from "./pages/suppliers/AddSupplier"
 import EditSupplier from "./pages/suppliers/EditSupplier"
 
-// import SupplierListUpload from "./pages/SupplierListUpload"
+import SupplierListUpload from "./pages/SupplierListUpload"
 // import Quotations from "./pages/Quotations"
 import MainLayout from "./components/layout/MainLayout"
 import ItemsList from "./pages/items/ItemsList"
@@ -24,8 +24,8 @@ export default function App() {
         <Route path="items" element={<ItemsList />} />
         <Route path="items/add" element={<AddItem />} />
         <Route path="items/edit/:id" element={<EditItem />} />
-        {/*  <Route path="supplier-list" element={<SupplierListUpload />} />
-        <Route path="quotations" element={<Quotations />} /> */}
+      <Route path="supplier-list" element={<SupplierListUpload />} />
+         {/*   <Route path="quotations" element={<Quotations />} /> */}
       </Route>
     </Routes>
     </BrowserRouter>

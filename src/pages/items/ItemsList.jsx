@@ -91,7 +91,7 @@ function ItemsList() {
       // REMOVE Y=THIS BLOCK IF NOT USING DUMMY DATA
      if (USE_DUMMY_DATA) {
       setLocalItems(prev => prev.filter(s => s.id !== localItems.id));
-      localStorage.setItem("dummyProducts", JSON.stringify(localItems.filter(s => s.id !== selectedSupplier.id)));
+      localStorage.setItem("dummyProducts", JSON.stringify(localItems.filter(s => s.id !== selectedItem.id)));
       setDeleteDialogOpen(false);
       setLocalItems(null);
       // showNotification...
@@ -206,9 +206,10 @@ function ItemsList() {
                     <TableCell>{item.supplierName || item.supplier}</TableCell>
                     <TableCell>${item.unitPrice}</TableCell>
                     <TableCell>${item.wholesalePrice}</TableCell>
-                    <TableCell>
+                    {/* <TableCell>
                       <Chip label={`$${item.actualPrice}`} color="primary" size="small" />
-                    </TableCell>
+                    </TableCell> */}
+                    <TableCell>${item.actualPrice}</TableCell>
                     <TableCell>{item.origin}</TableCell>
                     <TableCell align="right" >
                      
